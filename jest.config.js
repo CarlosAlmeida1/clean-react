@@ -3,6 +3,9 @@ module.exports = {
   collectCoverageFrom: ["<rootDir>/src/**/*.{ts,tsx}"],
   coverageDirectory: "coverage",
   testEnvironment: "node",
+  moduleNameMapper: {
+    "@/(.*)": "<rootDir>/src/$1",
+  },
   transform: {
     "^.+\\.(ts|tsx)$": "@swc/jest",
   },

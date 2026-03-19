@@ -15,6 +15,6 @@
     "allowJs": true,
     "resolveJsonModule": true
   },
-  "include": ["src", "tests"],
+  "include": ["src", "tests", "src/jest.config.js"],
   "exclude": ["tests/e2e/cypress"]
 }
