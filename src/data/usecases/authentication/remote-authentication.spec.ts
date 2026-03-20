@@ -1,6 +1,9 @@
 import { HttpPostClientSpy } from "@/data/test/mock-http-client";
 import { RemoteAuthentication } from "./remote-authentication";
-import { mockAuthentication } from "@/domain/test/mock-authentication";
+import {
+  mockAccoutMOdel,
+  mockAuthentication,
+} from "@/domain/test/mock-account";
 import { InvalidCredentialsError } from "../../../domain/errors/invalid-credentials-error";
 import { HttpStatusCode } from "@/data/protocols/http/http-response";
 import faker from "faker";
@@ -81,5 +84,17 @@ describe("RemoteAuthentication", () => {
     const promise = sut.auth(mockAuthentication());
 
     expect(promise).rejects.toThrow(new UnexpectedError());
+  });
+
+  test("Should return an AccountModel if HttpPostClient returns 200", async () => {
+    const { sut, httpPostClientSpy } = makeSut();
+    const httpResult = mockAccoutMOdel();
+    httpPostClientSpy.response = {
+      statusCode: HttpStatusCode.OK,
+      body: httpResult,
+    };
+    const account = await sut.auth(mockAuthentication());
+
+    expect(account).toEqual(httpResult);
   });
 });
