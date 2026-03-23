@@ -33,5 +33,9 @@
     "jest": "^30.3.0",
     "lint-staged": "^16.4.0",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@types/axios": "^0.9.36",
+    "axios": "^1.13.6"
   }
 }

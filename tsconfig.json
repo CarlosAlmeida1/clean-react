@@ -8,7 +8,7 @@
     "jsx": "react",
     "rootDirs": ["src", "tests"],
     "baseUrl": "src",
-    "strict": ,
+    "strict": false,
     "paths": {
       "@/*": ["*"],
       "@/tests/*": ["../tests/*"]
