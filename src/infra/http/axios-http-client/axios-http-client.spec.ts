@@ -5,6 +5,13 @@ import faker from "faker";
 
 jest.mock("axios");
 const mcokedAxios = axios as jest.Mocked<typeof axios>;
+const mockedAxiosResult = {
+  data: faker.random.objectElement(),
+  status: faker.random.number(),
+};
+
+mcokedAxios.post.mockResolvedValue(mockedAxiosResult as any);
+
 const makeSut = (): AxiosHttpClient => {
   return new AxiosHttpClient();
 };
@@ -21,5 +28,15 @@ describe("AxiosHttpClient", () => {
     await sut.post(request);
 
     expect(mcokedAxios.post).toHaveBeenCalledWith(request.url, request.body);
+  });
+
+  test("should return the correct statusCode and body", async () => {
+    const sut = makeSut();
+    const httpResponse = await sut.post(mockPostRequest());
+
+    expect(httpResponse).toEqual({
+      statusCode: mockedAxiosResult.status,
+      body: mockedAxiosResult.data,
+    });
   });
 });
